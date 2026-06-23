@@ -1,6 +1,20 @@
 ﻿@page
-@model DashboardModel
+@model IndexModel
 
-<h2>Dashboard</h2>
+<h2>Company List</h2>
 
-<p>Welcome @User.Identity.Name</p>
+<table class="table">
+    @foreach (var c in Model.Companies)
+    {
+        <tr>
+            <td>@c.Name</td>
+
+            <td>
+                <a asp-page="/Roles/Create"
+                   asp-route-companyId="@c.Id">
+                    Create Role
+                </a>
+            </td>
+        </tr>
+    }
+</table>

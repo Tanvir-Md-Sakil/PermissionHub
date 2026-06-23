@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PermissionHub.Pages
-{
-    public class IndexModel : PageModel
-    {
-        public void OnGet()
-        {
+namespace PermissionHub.Pages;
 
+public class IndexModel : PageModel
+{
+    public IActionResult OnGet()
+    {
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            return RedirectToPage("/Dashboard/Index");
         }
+
+        return RedirectToPage("/Account/Login");
     }
 }

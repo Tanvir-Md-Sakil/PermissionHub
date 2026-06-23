@@ -28,16 +28,24 @@ namespace PermissionHub.Pages.Account
             var user = await _repo.GetByEmail(Email);
 
             if (user == null)
+            {
+                Console.WriteLine("USER NOT FOUND");
                 return Page();
+            }
 
             if (!PasswordHelper.Verify(Password, user.PasswordHash))
+            {
+                Console.WriteLine("PASSWORD WRONG");
                 return Page();
+            }
+
+            Console.WriteLine("LOGIN SUCCESS");
 
             var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.FullName)
-        };
+    {
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim(ClaimTypes.Name, user.FullName)
+    };
 
             var identity = new ClaimsIdentity(claims, "Cookies");
 
