@@ -1,0 +1,12 @@
+﻿@page
+@model CreateUserModel
+
+<h2>Create User</h2>
+
+<form method="post">
+    <input asp-for="FullName" placeholder="Full Name" />
+    <input asp-for="Email" placeholder="Email" />
+    <input asp-for="Password" type="password" placeholder="Password" />
+
+    <button type="submit">Save</button>
+</form>

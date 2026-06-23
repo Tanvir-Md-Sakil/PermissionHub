@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PermissionHub")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0e97885b946e1495f5726bc86b174acafaaa350")]
 [assembly: System.Reflection.AssemblyProductAttribute("PermissionHub")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PermissionHub")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

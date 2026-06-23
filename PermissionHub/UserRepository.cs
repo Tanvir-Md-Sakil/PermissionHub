@@ -22,13 +22,22 @@ namespace PermissionHub
                 new { Email = email });
         }
 
-        public async Task Create(User user)
+        public async Task CreateAsync(User user)
         {
             using var db = _factory.Create();
 
             await db.ExecuteAsync(@"
         INSERT INTO Users(Id,FullName,Email,PasswordHash)
         VALUES(@Id,@FullName,@Email,@PasswordHash)", user);
+        }
+
+        public async Task<List<User>> GetAll()
+        {
+            using var db = _factory.Create();
+
+            var sql = "SELECT * FROM Users";
+
+            return (await db.QueryAsync<User>(sql)).ToList();
         }
     }
 }
