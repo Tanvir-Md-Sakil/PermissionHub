@@ -15,14 +15,22 @@ public class CreateRoleModel : PageModel
     [BindProperty]
     public string Name { get; set; }
 
-    public async Task<IActionResult> OnPost()
+    [BindProperty(SupportsGet = true)]
+    public Guid CompanyId { get; set; }
+
+    public void OnGet()
+    {
+    }
+
+    public async Task<IActionResult> OnPostAsync()
     {
         await _repo.CreateAsync(new Role
         {
             Id = Guid.NewGuid(),
+            CompanyId = CompanyId,
             Name = Name
         });
 
-        return RedirectToPage("Index");
+        return RedirectToPage("Index", new { companyId = CompanyId });
     }
 }

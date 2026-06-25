@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using PermissionHub.Models;
+using System.ComponentModel.Design;
 
 namespace PermissionHub
 {
@@ -68,12 +69,14 @@ namespace PermissionHub
             INSERT INTO Roles
             (
                 Id,
-                Name
+                Name,
+               CompanyId
             )
             VALUES
             (
                 @Id,
-                @Name
+                @Name,
+                @CompanyId
             )";
 
             return await db.ExecuteAsync(sql, role);
@@ -119,6 +122,26 @@ namespace PermissionHub
                 new { Name = name });
 
             return count > 0;
+        }
+
+        public async Task<List<Role>> GetByCompanyIdAsync(Guid companyId)
+        {
+            using var db = _factory.Create();
+
+            const string sql = @"
+        SELECT
+            Id,
+            Name,
+            CompanyId
+        FROM Roles
+        WHERE CompanyId = @CompanyId
+        ORDER BY Name";
+
+            var roles = await db.QueryAsync<Role>(
+                sql,
+                new { CompanyId = companyId });
+
+            return roles.ToList();
         }
     }
 }

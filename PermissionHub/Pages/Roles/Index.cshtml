@@ -1,9 +1,9 @@
 ﻿@page
 @model CreateRoleModel
-
-<h2>Create Role</h2>
-
 <form method="post">
+    <input type="hidden" asp-for="CompanyId" />
+
     <input asp-for="Name" placeholder="Role Name" />
+
     <button type="submit">Save</button>
 </form>
