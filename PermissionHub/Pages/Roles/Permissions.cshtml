@@ -1,0 +1,32 @@
+﻿@page
+@model PermissionsModel
+
+<h2>Role Permissions</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Module</th>
+            <th>Page</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var p in Model.Permissions)
+    {
+        <tr>
+            <td>@p.ModuleCode</td>
+            <td>@p.PageCode</td>
+
+            <td>
+                <form method="post" asp-page-handler="Remove">
+                    <input type="hidden" name="moduleCode" value="@p.ModuleCode" />
+                    <input type="hidden" name="pageCode" value="@p.PageCode" />
+                    <button class="btn btn-danger">Remove</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

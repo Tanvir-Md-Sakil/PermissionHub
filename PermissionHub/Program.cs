@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using PermissionHub;
 using PermissionHub.seed;
+using PermissionHub;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,11 @@ builder.Services.AddScoped<PermissionHub.RoleRepository>();
 builder.Services.AddScoped<AdminSeeder>();
 builder.Services.AddScoped<CompanyRepository>();
 builder.Services.AddScoped<UserRoleRepository>();
+builder.Services.AddScoped<ModuleRepository>();
+builder.Services.AddScoped<CompanyModuleRepository>();
+builder.Services.AddScoped<BudgetRepository>();
+builder.Services.AddScoped<PermissionService>();
+builder.Services.AddScoped<RolePermissionRepository>();
 
 var app = builder.Build();
 

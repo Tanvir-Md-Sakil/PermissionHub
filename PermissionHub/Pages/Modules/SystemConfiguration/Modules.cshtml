@@ -1,0 +1,75 @@
+﻿@page
+@model PermissionHub.Pages.SystemConfig.Modules.IndexModel
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <h3>Module Management</h3>
+
+        @if (Model.Company != null)
+        {
+            <span>
+                Company: <strong>@Model.Company.Name</strong>
+            </span>
+        }
+    </div>
+
+    <div class="card-body">
+
+        <form method="post">
+
+            <input type="hidden" asp-for="CompanyId" />
+
+            <table class="table table-striped">
+
+                <thead>
+                    <tr>
+                        <th width="80">Enabled</th>
+                        <th>Module</th>
+                        <th>Code</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var module in Model.Modules)
+                    {
+                        <tr>
+
+                            <td>
+                                <input type="checkbox"
+                                       name="SelectedModules"
+                                       value="@module.Id"
+                                       checked="@module.IsAssigned" />
+                            </td>
+
+                            <td>
+                                @module.Name
+                            </td>
+
+                            <td>
+                                @module.Code
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+            <button type="submit"
+                    class="btn btn-primary">
+                Save Changes
+            </button>
+
+            <a asp-page="/Index"
+               class="btn btn-secondary">
+                Back
+            </a>
+
+        </form>
+
+    </div>
+
+</div>

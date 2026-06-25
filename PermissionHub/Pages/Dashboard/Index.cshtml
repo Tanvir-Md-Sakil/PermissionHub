@@ -7,7 +7,7 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th width="200">Actions</th>
+            <th width="300">Actions</th>
         </tr>
     </thead>
 
@@ -28,6 +28,12 @@
                        asp-page="/UserRoles/AssignRole"
                        asp-route-companyId="@c.Id">
                         Assign User
+                    </a>
+
+                    <a class="btn btn-sm btn-success"
+                       asp-page="/Modules/SystemConfiguration/Modules"
+                       asp-route-companyId="@c.Id">
+                        Manage Modules
                     </a>
                 </td>
             </tr>
