@@ -26,6 +26,7 @@ builder.Services.AddScoped<PermissionHub.PermissionService>();
 builder.Services.AddScoped<PermissionHub.RoleRepository>();
 builder.Services.AddScoped<AdminSeeder>();
 builder.Services.AddScoped<CompanyRepository>();
+builder.Services.AddScoped<UserRoleRepository>();
 
 var app = builder.Build();
 

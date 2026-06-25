@@ -1,12 +1,43 @@
 ﻿@page
 @model CreateUserModel
 
-<h2>Create User</h2>
+<div class="row justify-content-center">
+    <div class="col-md-6">
 
-<form method="post">
-    <input asp-for="FullName" placeholder="Full Name" />
-    <input asp-for="Email" placeholder="Email" />
-    <input asp-for="Password" type="password" placeholder="Password" />
+        <div class="card shadow-sm">
+            <div class="card-body">
 
-    <button type="submit">Save</button>
-</form>
+                <h3 class="mb-4">Create User</h3>
+
+                <form method="post">
+
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input asp-for="FullName" class="form-control" placeholder="Enter full name" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control" placeholder="Enter email" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Enter password" />
+                    </div>
+
+                    <button type="submit" class="btn btn-success">
+                        Create User
+                    </button>
+
+                    <a asp-page="/Users/Index" class="btn btn-secondary">
+                        Cancel
+                    </a>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

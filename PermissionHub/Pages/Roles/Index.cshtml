@@ -1,9 +1,44 @@
 ﻿@page
-@model CreateRoleModel
-<form method="post">
-    <input type="hidden" asp-for="CompanyId" />
+@model PermissionHub.Pages.Roles.IndexModel
 
-    <input asp-for="Name" placeholder="Role Name" />
+<h2>
+    Roles
+    @if (Model.Company != null)
+    {
+        <span>- @Model.Company.Name</span>
+    }
+</h2>
 
-    <button type="submit">Save</button>
-</form>
+<a class="btn btn-primary mb-3"
+   asp-page="/Roles/CreateRole"
+   asp-route-companyId="@Model.CompanyId">
+    + Create Role
+</a>
+
+@if (Model.CompanyId == Guid.Empty)
+{
+    <div class="alert alert-warning">
+        Please select a company first.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Role Name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var role in Model.Roles)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}

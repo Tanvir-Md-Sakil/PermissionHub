@@ -12,7 +12,7 @@ namespace PermissionHub
             _factory = factory;
         }
 
-        public async Task<int> AssignRoleAsync(Guid userId, Guid roleId)
+        public async Task<int> AssignRoleAsync(Guid userId, Guid companyId ,Guid roleId)
         {
             using var db = _factory.Create();
 
@@ -20,11 +20,13 @@ namespace PermissionHub
                 INSERT INTO UserRoles
                 (
                     UserId,
+                    CompanyId,
                     RoleId
                 )
                 VALUES
                 (
                     @UserId,
+                    @CompanyId,
                     @RoleId
                 )";
 
@@ -32,6 +34,7 @@ namespace PermissionHub
                 new
                 {
                     UserId = userId,
+                    CompanyId = companyId,
                     RoleId = roleId
                 });
         }

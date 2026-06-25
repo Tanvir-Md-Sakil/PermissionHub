@@ -3,34 +3,35 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using PermissionHub;
 using PermissionHub.Models;
 
-public class CreateRoleModel : PageModel
+namespace PermissionHub.Pages.Roles
 {
-    private readonly RoleRepository _repo;
 
-    public CreateRoleModel(RoleRepository repo)
+    public class IndexModel : PageModel
     {
-        _repo = repo;
-    }
+        private readonly RoleRepository _roleRepo;
+        private readonly CompanyRepository _companyRepo;
 
-    [BindProperty]
-    public string Name { get; set; }
-
-    [BindProperty(SupportsGet = true)]
-    public Guid CompanyId { get; set; }
-
-    public void OnGet()
-    {
-    }
-
-    public async Task<IActionResult> OnPostAsync()
-    {
-        await _repo.CreateAsync(new Role
+        public IndexModel(RoleRepository roleRepo, CompanyRepository companyRepo)
         {
-            Id = Guid.NewGuid(),
-            CompanyId = CompanyId,
-            Name = Name
-        });
+            _roleRepo = roleRepo;
+            _companyRepo = companyRepo;
+        }
 
-        return RedirectToPage("Index", new { companyId = CompanyId });
+        // IMPORTANT: must match query string "companyId"
+        [BindProperty(SupportsGet = true)]
+        public Guid CompanyId { get; set; }
+
+        public List<Role> Roles { get; set; } = new();
+        public Company? Company { get; set; }
+
+        public async Task OnGetAsync()
+        {
+            if (CompanyId == Guid.Empty)
+                return;
+
+            Company = await _companyRepo.GetByIdAsync(CompanyId);
+
+            Roles = await _roleRepo.GetByCompanyIdAsync(CompanyId);
+        }
     }
 }

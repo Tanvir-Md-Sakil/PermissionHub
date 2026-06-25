@@ -3,9 +3,19 @@
 
 <h2>Users</h2>
 
-<a asp-page="Create">Create User</a>
+<a class="btn btn-success mb-3" asp-page="Create">
+    Create User
+</a>
 
-<table>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+
+    <tbody>
     @foreach (var u in Model.Users)
     {
         <tr>
@@ -13,4 +23,5 @@
             <td>@u.Email</td>
         </tr>
     }
+    </tbody>
 </table>

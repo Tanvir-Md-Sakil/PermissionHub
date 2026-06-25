@@ -3,33 +3,71 @@
 
 <h2>Assign Role</h2>
 
-<form method="post">
-
-    <input type="hidden" asp-for="UserId" />
-    <input type="hidden" asp-for="CompanyId" />
+<!-- ================= GET SECTION ================= -->
+<form method="get">
 
     <div class="mb-3">
-        <label>Role</label>
+        <label>User</label>
 
-        <select asp-for="RoleId" class="form-control">
+        <select asp-for="UserId" class="form-control">
+            <option value="">-- Select User --</option>
 
-            <option value="">
-                -- Select Role --
-            </option>
-
-            @foreach (var role in Model.Roles)
+            @foreach (var user in Model.Users)
             {
-                <option value="@role.Id">
-                    @role.Name
+                <option value="@user.Id">
+                    @user.FullName
                 </option>
             }
-
         </select>
     </div>
 
-    <button type="submit"
-            class="btn btn-primary">
-        Assign
-    </button>
+    <div class="mb-3">
+        <label>Company</label>
+
+        <select asp-for="CompanyId"
+                class="form-control"
+                onchange="this.form.submit()">
+
+            <option value="">-- Select Company --</option>
+
+            @foreach (var company in Model.Companies)
+            {
+                <option value="@company.Id">
+                    @company.Name
+                </option>
+            }
+        </select>
+    </div>
 
 </form>
+
+<!-- ================= POST SECTION ================= -->
+@if (Model.CompanyId != Guid.Empty)
+{
+    <form method="post">
+
+        <!-- preserve state -->
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="CompanyId" />
+
+        <div class="mb-3">
+            <label>Role</label>
+
+            <select asp-for="RoleId" class="form-control" required>
+                <option value="">-- Select Role --</option>
+
+                @foreach (var role in Model.Roles)
+                {
+                    <option value="@role.Id">
+                        @role.Name
+                    </option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Assign
+        </button>
+
+    </form>
+}

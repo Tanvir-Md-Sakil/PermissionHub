@@ -1,20 +1,36 @@
 ﻿@page
 @model IndexModel
 
-<h2>Company List</h2>
+<h2>Companies</h2>
 
-<table class="table">
-    @foreach (var c in Model.Companies)
-    {
+<table class="table table-striped">
+    <thead>
         <tr>
-            <td>@c.Name</td>
-
-            <td>
-                <a asp-page="/Roles/Index"
-                   asp-route-companyId="@c.Id">
-                    Create Role
-                </a>
-            </td>
+            <th>Name</th>
+            <th width="200">Actions</th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+        @foreach (var c in Model.Companies)
+        {
+            <tr>
+                <td>@c.Name</td>
+
+                <td>
+                    <a class="btn btn-sm btn-primary"
+                       asp-page="/Roles/Index"
+                       asp-route-companyId="@c.Id">
+                        Roles
+                    </a>
+
+                    <a class="btn btn-sm btn-success"
+                       asp-page="/UserRoles/AssignRole"
+                       asp-route-companyId="@c.Id">
+                        Assign User
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
